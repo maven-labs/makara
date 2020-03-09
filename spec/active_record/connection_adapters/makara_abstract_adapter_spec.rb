@@ -39,7 +39,8 @@ describe ActiveRecord::ConnectionAdapters::MakaraAbstractAdapter do
     'select pg_advisory_unlock(12345)' => true,
     'select pg_advisory_xact_lock(12345)' => true,
     'select pg_try_advisory_lock(12345)' => true,
-    'select pg_try_advisory_xact_lock(12345)' => true
+    'select pg_try_advisory_xact_lock(12345)' => true,
+    'copy (select * from users) to STDOUT CSV HEADER)' => false
   }.each do |sql, should_go_to_master|
 
     it "determines that \"#{sql}\" #{should_go_to_master ? 'requires' : 'does not require'} master" do
